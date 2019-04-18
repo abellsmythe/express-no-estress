@@ -1,8 +1,11 @@
 "use strict";
 
+// Dependencies
+const redis = require("./redis");
+const chalk = require("chalk");
+
 module.exports = (app) => {
-    const redis = require("./redis");
-    const limiter = require("express-limiter")(app, redis);
+    const limiter = require("express-limiter")(app, redis());
 
     limiter({
         path: '*',
@@ -15,4 +18,6 @@ module.exports = (app) => {
             next({ message: 'Rate limit exceeded', statusCode: 429 });
         }
     });
+
+    console.log(`${chalk.yellow('Limiter')} running`);
 };
