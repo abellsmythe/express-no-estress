@@ -1,0 +1,94 @@
+const { <%= model %> } = require("../models");
+
+// Create <%= name %>
+exports.create = (req, res) => {
+  const data = req.body;
+  <%= model %>.findOne({
+    description: data.description,
+  }).exec((err, exist) => {
+    if (!exist) {
+      <%= model %>.create(data, (err, data) => {
+        if (err) {
+          res.status(500).json({
+            error: true,
+            message: 'An error has occured ' + err
+          });
+        } else {
+          res.status(200).json(data);
+        }
+      });
+    } else {
+      res.status(400).json({
+        error: true,
+        message: '<%= name %> already exist'
+      });
+    }
+  });
+};
+
+// Read All <%= name %>s
+exports.readAll = (req, res) => {
+  let query = {};
+  const search = req.params.search;
+  if (search) {
+    query = {
+      $or: [
+        { description: { $regex: search, $options: "i" } }
+      ]
+    };
+  }
+  <%= model %>.find(query).exec((err, data) => {
+    if (err) {
+      res.status(500).json({
+        error: true,
+        message: 'An error has occured ' + err
+      });
+    } else {
+      res.status(200).json(data);
+    }
+  });
+};
+
+// Read <%= name %>
+exports.read = (req, res) => {
+  <%= model %>.findOne({ _id: req.params.id }).exec((err, data) => {
+    if (err) {
+      res.status(500).json({
+        error: true,
+        message: 'An error has occured ' + err
+      });
+    } else {
+      res.status(200).json(data);
+    }
+  });
+};
+
+// Update <%= name %>
+exports.update = (req, res) => {
+  const data = req.body;
+  <%= model %>.findOneAndUpdate({ _id: req.params.id }, data, { new: true })
+    .exec((err, data) => {
+      if (err) {
+        res.status(500).json({
+          error: true,
+          message: 'An error has occured ' + err
+        });
+      } else {
+        res.status(200).json(data);
+      }
+    });
+};
+
+// Delete <%= name %>
+exports.delete = (req, res) => {
+  <%= model %>.findOneAndRemove({ _id: req.params.id }, (err, data) => {
+    if (err) {
+      res.status(500).json({
+        error: true,
+        message: 'An error has occured ' + err
+      });
+    } else {
+      res.status(200).json('<%= name %> ' + data._id + ' deleted!');
+    }
+  });
+};
