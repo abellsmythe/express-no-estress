@@ -36,6 +36,6 @@ services(app);
 routes(app);
 
 // Listener
-app.listen(config.env.port, () => {
-  console.log(`We are live on port ${require("chalk").green(config.env.port)}`);
+const server = app.listen(config.env.port, () => {
+  console.log(`We are live on port ${require("chalk").green(server.address().port)}`);
 });
