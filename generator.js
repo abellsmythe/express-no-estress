@@ -95,9 +95,6 @@ const options = {
 const generator = () => {
     const args = minimist(process.argv.slice(2), options);
 
-    console.log(args);
-    return;
-
     // Help Menu
     if (Boolean(args.help)) {
         const lines = [];
@@ -173,7 +170,12 @@ const generator = () => {
 
     // Create Swagger Docs
     if (args.docs) {
-        console.log('CREATE SWAGGER DOCS');
+        createFileFromTemplate(
+            'Swagger',
+            `./api/docs/${name}.yaml`,
+            './template/swagger.tmpl',
+            { name, path: name.toLowerCase() },
+        );
     }
 };
 

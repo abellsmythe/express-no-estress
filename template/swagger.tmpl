@@ -1,0 +1,92 @@
+paths:
+  /<%= path %>/:
+    post:
+      tags:
+        - <%= name %>
+      summary: creates a new <%= name %>
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: create
+        description: creates a new <%= name %>
+        required: true
+        schema:
+          $ref: '#/definitions/<%= name %>' 
+      responses:
+        201:
+          description: An object <%= name %> with details
+  /<%= path %>/{id}:
+    get:
+      tags:
+        - <%= name %>
+      summary: get a <%= name %> by id
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      responses:
+        201:
+          description: An object <%= name %> with details
+    put:
+      tags:
+        - <%= name %>
+      summary: update a <%= name %> by id
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      - in: body
+        name: create
+        description: creates a new <%= name %>
+        required: true
+        schema:
+          $ref: '#/definitions/<%= name %>' 
+      responses:
+        201:
+          description: An object <%= name %> with details
+    delete:
+      tags:
+        - <%= name %>
+      summary: delete a <%= name %> by id
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      responses:
+        201:
+          description: A message of deleted <%= name %>
+  /<%= path %>/search/{search}:
+    get:
+      tags:
+        - <%= name %>
+      summary: get a <%= name %> by search parameters
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: search
+        schema:
+          type: string
+        required: true
+      responses:
+        201:
+          description: An Array of objects <%= name %> with details
+definitions:
+  <%= name %>:
+    type: object
+    properties:
+      description:
+        type: string

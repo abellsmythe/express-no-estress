@@ -9,10 +9,10 @@ const config = require("../../config");
 
 let db;
 
-module.exports = () => {
+module.exports = async () => {
     if (!db) {
         // Connect Mongo DB Client
-        db = mongoose.createConnection(
+        db = await mongoose.connect(
             config.db.url,
             {
                 useNewUrlParser: true,
@@ -21,13 +21,7 @@ module.exports = () => {
             }
         );
     
-        db.once('open', function() {
-            console.log(`${chalk.yellow('MongoDB')} database connection loaded ${chalk.green('successful')}`);
-        });
-    
-        db.on('error', function(err) {
-            console.log(err);
-        });
+        console.log(`${chalk.yellow('MongoDB')} database connection loaded ${chalk.green('successful')}`);
     }
 
     return db;

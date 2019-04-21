@@ -30,6 +30,7 @@ exports.create = (req, res) => {
 exports.readAll = (req, res) => {
   let query = {};
   const search = req.params.search;
+
   if (search) {
     query = {
       $or: [
@@ -37,6 +38,7 @@ exports.readAll = (req, res) => {
       ]
     };
   }
+
   <%= model %>.find(query).exec((err, data) => {
     if (err) {
       res.status(500).json({
