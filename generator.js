@@ -72,6 +72,23 @@ const createFile = (name, overwrite) => (type, filePath, templatePath, templateV
     });
 }
 
+const getModelAttributes = function (excludedAttributes = ['_id', 'createdAt', 'updatedAt', '__v']) {
+    const attributes = Object.entries(this.schema.paths)
+                            .filter(([name]) =>
+                                !excludedAttributes.includes(name)
+                            ) 
+                            .reduce((accumulator, [name, attribute]) => {
+                                accumulator.push({
+                                    name,
+                                    type: attribute.instance.toLowerCase()
+                                });
+
+                                return accumulator;
+                            }, []);
+
+    return attributes;
+}
+
 const options = {
     default: {
         m: false,
@@ -92,7 +109,7 @@ const options = {
     },
 };
 
-const generator = () => {
+const generator = async () => {
     const args = minimist(process.argv.slice(2), options);
 
     // Help Menu
@@ -103,6 +120,7 @@ const generator = () => {
         lines.push({ msg: '\t npm run make:model       -- [ -n name  | --name name ] [options]' });
         lines.push({ msg: '\t npm run make:controller  -- [ -n name  | --name name ] [options]' });
         lines.push({ msg: '\t npm run make:routes      -- [ -n name  | --name name ] [options]' });
+        lines.push({ msg: '\t npm run make:docs        -- [ -n name  | --name name ] [options]' });
         lines.push({ msg: '\t npm run make:resource    -- [ -n name  | --name name ] [options]' });
         lines.push({ msg: '' });
         lines.push({ msg: '\t npm run make -- -name test -m', color: 'yellow' });
@@ -117,7 +135,7 @@ const generator = () => {
         lines.push({ msg: '  -m, --model      \t create model               \t\t (default: false)' });
         lines.push({ msg: '  -c, --controller \t create controller          \t\t (default: false)' });
         lines.push({ msg: '  -r, --routes     \t create routes              \t\t (default: false)' });
-        lines.push({ msg: '  -d, --docs       \t create Swagger basic doc   \t\t (default: false)' });
+        lines.push({ msg: '  -d, --docs       \t create Swagger basic doc   \t\t (default: false, required: model)' });
         lines.push({ msg: '  -o, --overwrite  \t if file exist overwrite it \t\t (default: false)' });
 
         print(lines);
@@ -140,7 +158,7 @@ const generator = () => {
 
     // Create Model
     if (args.model) {
-        createFileFromTemplate(
+        await createFileFromTemplate(
             'Model',
             `./api/models/${name}Model.js`,
             './template/model.tmpl',
@@ -150,7 +168,7 @@ const generator = () => {
 
     // Create Controller
     if (args.controller) {
-        createFileFromTemplate(
+        await createFileFromTemplate(
             'Controller',
             `./api/controllers/${name}Controller.js`,
             './template/controller.tmpl',
@@ -160,7 +178,7 @@ const generator = () => {
 
     // Create Routes
     if (args.routes) {
-        createFileFromTemplate(
+        await createFileFromTemplate(
             'Routes',
             `./api/routes/${name}Routes.js`,
             './template/routes.tmpl',
@@ -170,12 +188,20 @@ const generator = () => {
 
     // Create Swagger Docs
     if (args.docs) {
-        createFileFromTemplate(
-            'Swagger',
-            `./api/docs/${name}.yaml`,
-            './template/swagger.tmpl',
-            { name, path: name.toLowerCase() },
-        );
+        const modelFilePath = `./api/models/${name}Model.js`;
+
+        if (fs.existsSync(modelFilePath)) {
+            const model         = await require(modelFilePath);
+            const attributes    = await getModelAttributes.call(model);
+            
+            await createFileFromTemplate(
+                'Swagger',
+                `./api/docs/${name}.yaml`,
+                './template/swagger.tmpl',
+                { name, path: name.toLowerCase(), attributes },
+            );
+
+        }
     }
 };
 

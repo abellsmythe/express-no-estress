@@ -87,6 +87,6 @@ paths:
 definitions:
   <%= name %>:
     type: object
-    properties:
-      description:
-        type: string
+    properties: <% _.forEach(attributes, function(attribute) { %>
+      <%- attribute.name %>:
+        type: <%- attribute.type %><% }); %>

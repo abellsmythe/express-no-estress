@@ -10,6 +10,7 @@
     "make:model": "node generator --model --name $1",
     "make:controller": "node generator --controller --name $1",
     "make:routes": "node generator --routes --name $1",
+    "make:docs": "node generator --docs -o --name $1",
     "make:resource": "node generator --model --controller --routes --docs --name $1"
   },
   "keywords": [
