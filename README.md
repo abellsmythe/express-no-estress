@@ -35,7 +35,7 @@ Start the app
 ```
 $ npm start
 ```
-by default, the app will start on `PORT 8080`
+by default, the app will start on `PORT 8000`
 
 You can change the PORT by adding a `PORT` environment variable. 
 eg.
@@ -47,11 +47,11 @@ now the app will start on `PORT 6000`
 
 You will now be able to access CRUD (create, read, update and delete) endpoints 
 
-`[POST] http://localhost:8080/yourFirstEndpoint` Create yourFirstEndpoint resources
-`[GET] http://localhost:8080/yourFirstEndpoint/search/:search?` Get yourFirstEndpoint resources. Supports limits, sorting, pagination, select (projection), search and date range
-`[GET] http://localhost:8080/yourFirstEndpoint/:id` Get a yourFirstEndpoint resource
-`[PUT] http://localhost:8080/yourFirstEndpoint/:id` Update one yourFirstEndpoint resource
-`[DELETE] http://localhost:8080/yourFirstEndpoint/:id` Delete one yourFirstEndpoint resource
+`[POST] http://localhost:8000/yourFirstEndpoint` Create yourFirstEndpoint resources
+`[GET] http://localhost:8000/yourFirstEndpoint/search/:search?` Get yourFirstEndpoint resources. Supports limits, sorting, pagination, select (projection), search and date range
+`[GET] http://localhost:8000/yourFirstEndpoint/:id` Get a yourFirstEndpoint resource
+`[PUT] http://localhost:8000/yourFirstEndpoint/:id` Update one yourFirstEndpoint resource
+`[DELETE] http://localhost:8000/yourFirstEndpoint/:id` Delete one yourFirstEndpoint resource
 
 ## Versioning your API endpoints
 
@@ -64,6 +64,7 @@ You can create multiple versions of your API endpoints by simply adding the vers
 - api 
     - controllers
     - docs
+    - helpers
     - loaders
     - models
     - routes
