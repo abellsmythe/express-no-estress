@@ -4,6 +4,9 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
+// Helpers
+const modelSearchByAttributes = require("../helpers/model-search-by-attributes");
+
 const <%= schema %> = new Schema(
   {
     description: { type: String, required: true, required: true, unique: true, dropDups: true },
@@ -15,5 +18,10 @@ const <%= schema %> = new Schema(
     }
   }
 );
+
+<%= schema %>.statics.searchByAttributes = function(...args) {
+  return modelSearchByAttributes.apply(this, args);
+};
+
 
 module.exports = mongoose.model("<%= name %>", <%= schema %>);

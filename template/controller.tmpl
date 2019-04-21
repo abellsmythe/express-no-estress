@@ -3,9 +3,9 @@ const { <%= model %> } = require("../models");
 // Create <%= name %>
 exports.create = (req, res) => {
   const data = req.body;
-  <%= model %>.findOne({
-    description: data.description,
-  }).exec((err, exist) => {
+
+  <%= model %>.findOne(data)
+  .exec((err, exist) => {
     if (!exist) {
       <%= model %>.create(data, (err, data) => {
         if (err) {
@@ -28,18 +28,9 @@ exports.create = (req, res) => {
 
 // Read All <%= name %>s
 exports.readAll = (req, res) => {
-  let query = {};
   const search = req.params.search;
 
-  if (search) {
-    query = {
-      $or: [
-        { description: { $regex: search, $options: "i" } }
-      ]
-    };
-  }
-
-  <%= model %>.find(query).exec((err, data) => {
+  <%= model %>.searchByAttributes(search).exec((err, data) => {
     if (err) {
       res.status(500).json({
         error: true,
@@ -68,6 +59,7 @@ exports.read = (req, res) => {
 // Update <%= name %>
 exports.update = (req, res) => {
   const data = req.body;
+
   <%= model %>.findOneAndUpdate({ _id: req.params.id }, data, { new: true })
     .exec((err, data) => {
       if (err) {
