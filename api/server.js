@@ -14,7 +14,7 @@ async function startServer() {
   const app = express();
 
   // Loaders
-  loaders(app);
+  await loaders(app);
 
   // Router
   routes(app);
@@ -28,9 +28,11 @@ async function startServer() {
       return;
     }
 
-    console.log('################################################');
-    console.log(` 🛡️  Server listening on port: ${require("chalk").green(server.address().port)} 🛡️ `);
-    console.log('################################################');
+    console.log('');
+    console.log('################################');
+    console.log(` Server listening on port: ${require("chalk").green(server.address().port)}`);
+    console.log('################################');
+    console.log('');
   });
 
 }

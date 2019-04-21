@@ -12,8 +12,8 @@ require("fs").readdirSync(normalizedPath).forEach(function(file) {
     }
 });
 
-module.exports = (app) => {
-    Object.entries(services).forEach(async ([name, service]) => {
-        service(app);
+module.exports = async (app) => {
+    await Object.entries(services).forEach(async ([name, service]) => {
+        await service(app);
     });
 };
