@@ -1,11 +1,11 @@
 "use strict";
 
+// Package JSON
 const me = require("../package.json");
 
 const {
-    BODY_PARSER_JSON_LIMIT: jsonLimit = "50mb",
-    BODY_PARSER_RAW_LIMIT: rawLimit = "50mb",
-    BODY_PARSER_TEXT_LIMIT: textLimit = "50mb",
+    PORT: port = 8000,
+    API_PREFIX: apiPrefix = '/api',
 } = process.env;
 
 const swagger = {
@@ -15,8 +15,8 @@ const swagger = {
             version: me.version,
             description: me.description,
         },
-        host: 'localhost:8000', // the host or url of the app
-        basePath: '/', // the basepath of your endpoint
+        host: `localhost:${port}`,
+        basePath: `${apiPrefix}/`,
     },
     // path to the API docs
     apis: ['api/docs/**/*.yaml'],
