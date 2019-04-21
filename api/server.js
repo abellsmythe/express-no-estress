@@ -1,26 +1,38 @@
 "use strict";
 
 // Dependencies
-const express       = require("express");
-
-// App
-const app = express();
+const express   = require("express");
 
 // Enviroment
 const config    = require("../config");
 const routes    = require("./routes");
-const laoders  = require("./laoders");
+const loaders   = require("./loaders");
 
-// Middlewares
+async function startServer() {
 
+  // App
+  const app = express();
 
-// Loaders
-laoders(app);
+  // Loaders
+  loaders(app);
 
-// Router
-routes(app);
+  // Router
+  routes(app);
 
-// Listener
-const server = app.listen(config.env.port, () => {
-  console.log(`We are live on port ${require("chalk").green(server.address().port)}`);
-});
+  // Listener
+  const server = app.listen(config.env.port, err => {
+    if (err) {
+      console.log(err);
+      process.exit(1);
+
+      return;
+    }
+
+    console.log('################################################');
+    console.log(` 🛡️  Server listening on port: ${require("chalk").green(server.address().port)} 🛡️ `);
+    console.log('################################################');
+  });
+
+}
+
+startServer();

@@ -1,3 +1,5 @@
+"use strict";
+
 const {
     DB_NAME: database = "express-no-estress",
     DB_USER: user,

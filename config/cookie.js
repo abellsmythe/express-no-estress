@@ -1,3 +1,5 @@
+"use strict";
+
 const {
     COOKIE_MAX_AGE: maxAge = 86400000,
     COOKIE_KEYS: keys = "express-no-estress"

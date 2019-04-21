@@ -1,3 +1,5 @@
+"use strict";
+
 const {
   CORS_ORIGIN: origin = true,
   CORS_METHODS: methods = "GET,HEAD,PUT,PATCH,POST,DELETE", 
