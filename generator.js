@@ -19,7 +19,7 @@ const whiteSpaces = (n) => {
     return " ".repeat(n);
 }
 
-const createFileFromTemplate = (name, type, filePath, templatePath, templateVariables, overwrite) => {
+const createFile = (name, overwrite) => (type, filePath, templatePath, templateVariables) => {
     const message = (typeMessage, data) => {
         const { type, name, filePath } = data;
         let message     = '';
@@ -95,12 +95,24 @@ const options = {
 const generator = () => {
     const args = minimist(process.argv.slice(2), options);
 
+    console.log(args);
+    return;
+
     // Help Menu
     if (Boolean(args.help)) {
         const lines = [];
         lines.push({ msg: 'Usage:', color: 'green' });
-        lines.push({ msg: '\t npm run make -- [ -n name  | --name name ] [options]' });
-        lines.push({ msg: '\t npm run make -- -name test', color: 'yellow' });
+        lines.push({ msg: '\t npm run make             -- [ -n name  | --name name ] [options]' });
+        lines.push({ msg: '\t npm run make:model       -- [ -n name  | --name name ] [options]' });
+        lines.push({ msg: '\t npm run make:controller  -- [ -n name  | --name name ] [options]' });
+        lines.push({ msg: '\t npm run make:routes      -- [ -n name  | --name name ] [options]' });
+        lines.push({ msg: '\t npm run make:resource    -- [ -n name  | --name name ] [options]' });
+        lines.push({ msg: '' });
+        lines.push({ msg: '\t npm run make -- -name test -m', color: 'yellow' });
+        lines.push({ msg: '\t npm run make:model test', color: 'yellow' });
+        lines.push({ msg: '\t npm run make:controller test', color: 'yellow' });
+        lines.push({ msg: '\t npm run make:routes test', color: 'yellow' });
+        lines.push({ msg: '\t npm run make:resource test', color: 'yellow' });
         lines.push({ msg: '' });
         lines.push({ msg: 'Options:', color: 'green' });
         lines.push({ msg: '  -h, --help       \t display help menu' });
@@ -118,52 +130,44 @@ const generator = () => {
 
     // Must exist module name
     if (!args.name) {
-        const lines = [];
-        lines.push({ msg: 'Error: name of module is required', color: 'red' });
-        lines.push({ msg: 'Usage:', color: 'green' });
-        lines.push({ msg: '\t npm run make -- [ -n name  | --name name ] [options]' });
-        lines.push({ msg: '\t npm run make -- -name test', color: 'yellow' });
-
-        print(lines);
+        print([{
+            msg: 'Error: name of module is required', color: 'red'
+        }]);
 
         return null;
     }
 
     const name = _.capitalize(args.name);
+    
+    const createFileFromTemplate = createFile(name, args.overwrite);
 
     // Create Model
     if (args.model) {
         createFileFromTemplate(
-            name,
             'Model',
             `./api/models/${name}Model.js`,
             './template/model.tmpl',
             { name, schema: `${name}Schema` },
-            args.overwrite,
         );
     }
 
     // Create Controller
     if (args.controller) {
         createFileFromTemplate(
-            name,
             'Controller',
             `./api/controllers/${name}Controller.js`,
             './template/controller.tmpl',
             { name, model: `${name}Model` },
-            args.overwrite,
         );
     }
 
     // Create Routes
     if (args.routes) {
         createFileFromTemplate(
-            name,
             'Routes',
             `./api/routes/${name}Routes.js`,
             './template/routes.tmpl',
             { name, controller: `${name}Controller` },
-            args.overwrite,
         );
     }
 
