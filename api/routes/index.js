@@ -1,5 +1,8 @@
 "use strict";
 
+// Environment
+const config = require("../../config");
+
 const routes = {};
 const normalizedPath = require("path").join(__dirname, "./");
 
@@ -13,9 +16,8 @@ require("fs").readdirSync(normalizedPath).forEach(function(file) {
 });
 
 module.exports = (app) => {
-
     Object.entries(routes).forEach(([name, routes]) => {
-        app.use(`/${name}`, routes);
+        app.use(`${config.env.apiPrefix}/${name}`, routes);
     });
 
     app.use(function(req, res, next) {
