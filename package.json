@@ -4,8 +4,8 @@
   "description": "A template for creating APIs Fast",
   "main": "server.js",
   "scripts": {
-    "dev": "nodemon app/server",
-    "start": "node app/server",
+    "dev": "nodemon api/server",
+    "start": "node api/server",
     "make": "node generator"
   },
   "keywords": [

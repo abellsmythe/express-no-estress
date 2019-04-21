@@ -21,7 +21,7 @@ const options = {
     // import swaggerDefinitions
     swaggerDefinition,
     // path to the API docs
-    apis: ['app/docs/**/*.yaml'],
+    apis: ['api/docs/**/*.yaml'],
 };
 
 module.exports = (app) => {
