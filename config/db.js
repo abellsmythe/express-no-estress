@@ -1,17 +1,28 @@
 "use strict";
 
 const {
-    DB_NAME: database = "express-no-estress",
     DB_USER: user,
-    DB_PASSWORD: password
+    DB_PASSWORD: password,
+    DB_HOST: host = 'localhost',
+    DB_PORT: port = '27017',
+    DB_NAME: database = "rest-api",
 } = process.env;
 
+let url = [
+    'mongodb://',
+    user && password ? `${user}:${password}@` : '',
+    host,
+    `:${port}`,
+    `/${database}`,
+].join('');
+
 const db = {
-    //url: `mongodb://${user}:${password}@ds143143.mlab.com:43143/${database}`,
-    url: `mongodb://localhost:27017/${database}`,
-    database,
+    url,
     user, 
     password,
+    host,
+    port,
+    database,
 };
 
 module.exports = db;

@@ -4,7 +4,8 @@
 const me = require("../package.json");
 
 const {
-    PORT: port = 8000,
+    PORT: port = 3000,
+    API_DOMAIN: apiDomain = 'localhost',
     API_PREFIX: apiPrefix = '/api',
 } = process.env;
 
@@ -15,7 +16,7 @@ const swagger = {
             version: me.version,
             description: me.description,
         },
-        host: `localhost:${port}`,
+        host: `${apiDomain}:${port}`,
         basePath: `${apiPrefix}/`,
     },
     // path to the API docs
