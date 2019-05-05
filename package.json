@@ -5,13 +5,15 @@
   "main": "server.js",
   "scripts": {
     "dev": "nodemon api/server",
-    "start": "node api/server",
+    "start": "pm2 start api/server.js",
     "make": "node generator --name $1",
     "make:model": "node generator --model --name $1",
+    "make:service": "node generator --service --name $1",
     "make:controller": "node generator --controller --name $1",
     "make:routes": "node generator --routes --name $1",
+    "make:events": "node generator --events --name $1",
     "make:docs": "node generator --docs -o --name $1",
-    "make:resource": "node generator --model --controller --routes --docs --name $1"
+    "make:resource": "node generator --model --service --controller --routes --events --docs --name $1"
   },
   "keywords": [
     "REST",
@@ -40,6 +42,7 @@
     "hpp": "^0.2.2",
     "lodash": "^4.17.11",
     "mongoose": "^5.4.6",
+    "pm2": "^3.5.0",
     "redis": "^2.8.0",
     "swagger-jsdoc": "^3.2.9",
     "swagger-ui-express": "^4.0.2"
