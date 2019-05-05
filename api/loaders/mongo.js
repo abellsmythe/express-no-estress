@@ -12,16 +12,23 @@ let db;
 module.exports = async () => {
     if (!db) {
         // Connect Mongo DB Client
-        db = await mongoose.connect(
+        await mongoose.connect(
             config.db.url,
             {
                 useNewUrlParser: true,
                 useCreateIndex: true,
                 autoIndex: false,
+                useFindAndModify: false,
+            },
+            function (err, client) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    db = client;
+                    console.log(`${chalk.yellow('MongoDB')} database connection loaded ${chalk.green('successful')}`);
+                }
             }
         );
-    
-        console.log(`${chalk.yellow('MongoDB')} database connection loaded ${chalk.green('successful')}`);
     }
 
     return db;

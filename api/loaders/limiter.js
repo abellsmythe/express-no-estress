@@ -9,11 +9,12 @@ const config = require("../../config");
 
 let limit;
 
-module.exports = (app) => {
+module.exports = async (app) => {
     if (!limit) {
-        const limiter = require("express-limiter")(app, redis());
+        const redisclient   = await redis();
+        const limiter       = await require("express-limiter")(app, redisclient);
 
-        limit = limiter({
+        limit = await limiter({
             path: config.limiter.path,
             method: config.limiter.method,
             lookup: config.limiter.lookup,
