@@ -2,6 +2,7 @@
 
 // Dependencies
 const express   = require("express");
+const chalk     = require("chalk");
 
 // Enviroment
 const config    = require("../config");
@@ -28,11 +29,7 @@ async function startServer() {
       return;
     }
 
-    console.log('');
-    console.log('################################');
-    console.log(` Server listening on port: ${require("chalk").green(server.address().port)}`);
-    console.log('################################');
-    console.log('');
+    console.log(`\n${chalk.hex('#9000FF').bold('Server')} listening on port: ${chalk.hex('#9000FF').bold(server.address().port)}\n`);
   });
 
 }
