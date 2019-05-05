@@ -197,7 +197,6 @@ const generator = async () => {
     }
 
     // Create Event Emitter
-    console.log(args);
     if (args.events) {
         await createFileFromTemplate(
             'Event',
