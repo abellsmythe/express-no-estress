@@ -1,0 +1,71 @@
+const { <%= model %> } = require("../models");
+
+// Event Emitter
+const eventEmitter = require("../helpers/event-emitter");
+
+// Create <%= name %>
+exports.create = (data, cb) => {
+  <%= model %>.findOne(data)
+    .exec((err, exist) => {
+      if (!exist) {
+        <%= model %>.create(data, (err, res) => {
+          if (err) {
+            cb({ message: 'An error has occured ' + err });
+          } else {
+            cb(null, res);
+            eventEmitter.emit('<%= name %>-Created', res);
+          }
+        });
+      } else {
+        cb({ message: '<%= name %> already exist' });
+      }
+    });
+};
+
+// Read All <%= name %>s
+exports.readAll = (search, cb) => {
+  <%= model %>.searchByAttributes(search).exec((err, data) => {
+    if (err) {
+      cb({ message: 'An error has occured ' + err });
+    } else {
+      cb(null, data);
+    }
+  });
+};
+
+// Read <%= name %>
+exports.read = (id, cb) => {
+  <%= model %>.findOne({ _id: id }).exec((err, data) => {
+    if (err) {
+      cb({ message: 'An error has occured ' + err });
+    } else {
+      cb(null, data);
+    }
+  });
+};
+
+// Update <%= name %>
+exports.update = (id, data, cb) => {
+  <%= model %>.findOneAndUpdate({ _id: id }, data, { new: true })
+    .exec((err, data) => {
+      if (err) {
+        cb({ message: 'An error has occured ' + err });
+      } else {
+        cb(null, data);
+        eventEmitter.emit('<%= name %>-Updated', data);
+      }
+    });
+};
+
+// Delete <%= name %>
+exports.delete = (id, cb) => {
+  <%= model %>.findOneAndRemove({ _id: id }, (err, data) => {
+    if (err) {
+      cb({ message: 'An error has occured ' + err });
+    } else {
+      cb(null, '<%= name %> ' + data._id + ' deleted!');
+      eventEmitter.emit('<%= name %>-Deleted', data);
+    }
+  });
+};
+
