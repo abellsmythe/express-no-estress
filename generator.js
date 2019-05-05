@@ -92,8 +92,10 @@ const getModelAttributes = function (excludedAttributes = ['_id', 'createdAt', '
 const options = {
     default: {
         m: false,
+        s: false,
         c: false,
         r: false,
+        e: false,
         d: false,
         o: false,
         h: false,
@@ -101,7 +103,9 @@ const options = {
     alias: {
         n: 'name',
         m: 'model',
+        s: 'service',
         c: 'controller',
+        e: 'events',
         r: 'routes',
         d: 'docs',
         o: 'overwrite',
@@ -118,14 +122,18 @@ const generator = async () => {
         lines.push({ msg: 'Usage:', color: 'green' });
         lines.push({ msg: '\t npm run make             -- [ -n name  | --name name ] [options]' });
         lines.push({ msg: '\t npm run make:model       -- [ -n name  | --name name ] [options]' });
+        lines.push({ msg: '\t npm run make:service     -- [ -n name  | --name name ] [options]' });
         lines.push({ msg: '\t npm run make:controller  -- [ -n name  | --name name ] [options]' });
         lines.push({ msg: '\t npm run make:routes      -- [ -n name  | --name name ] [options]' });
+        lines.push({ msg: '\t npm run make:events      -- [ -n name  | --name name ] [options]' });
         lines.push({ msg: '\t npm run make:docs        -- [ -n name  | --name name ] [options]' });
         lines.push({ msg: '\t npm run make:resource    -- [ -n name  | --name name ] [options]' });
         lines.push({ msg: '' });
         lines.push({ msg: '\t npm run make -- -name test -m', color: 'yellow' });
+        lines.push({ msg: '\t npm run make:service test', color: 'yellow' });
         lines.push({ msg: '\t npm run make:model test', color: 'yellow' });
         lines.push({ msg: '\t npm run make:controller test', color: 'yellow' });
+        lines.push({ msg: '\t npm run make:events test', color: 'yellow' });
         lines.push({ msg: '\t npm run make:routes test', color: 'yellow' });
         lines.push({ msg: '\t npm run make:resource test', color: 'yellow' });
         lines.push({ msg: '' });
@@ -133,8 +141,10 @@ const generator = async () => {
         lines.push({ msg: '  -h, --help       \t display help menu' });
         lines.push({ msg: '  -n, --name       \t name of the module to be created' });
         lines.push({ msg: '  -m, --model      \t create model               \t\t (default: false)' });
-        lines.push({ msg: '  -c, --controller \t create controller          \t\t (default: false)' });
-        lines.push({ msg: '  -r, --routes     \t create routes              \t\t (default: false)' });
+        lines.push({ msg: '  -m, --service    \t create service             \t\t (default: false, required: model)' });
+        lines.push({ msg: '  -c, --controller \t create controller          \t\t (default: false, required: service)' });
+        lines.push({ msg: '  -e, --events     \t create events emitter      \t\t (default: false, required: service)' });
+        lines.push({ msg: '  -r, --routes     \t create routes              \t\t (default: false, required: controller)' });
         lines.push({ msg: '  -d, --docs       \t create Swagger basic doc   \t\t (default: false, required: model)' });
         lines.push({ msg: '  -o, --overwrite  \t if file exist overwrite it \t\t (default: false)' });
 
@@ -166,13 +176,34 @@ const generator = async () => {
         );
     }
 
+    // Create Service
+    if (args.service) {
+        await createFileFromTemplate(
+            'Service',
+            `./api/services/${name}Service.js`,
+            './template/service.tmpl',
+            { name, model: `${name}Model` },
+        );
+    }
+
     // Create Controller
     if (args.controller) {
         await createFileFromTemplate(
             'Controller',
             `./api/controllers/${name}Controller.js`,
             './template/controller.tmpl',
-            { name, model: `${name}Model` },
+            { name, service: `${name}Service` },
+        );
+    }
+
+    // Create Event Emitter
+    console.log(args);
+    if (args.events) {
+        await createFileFromTemplate(
+            'Event',
+            `./api/events/${name}Event.js`,
+            './template/event.tmpl',
+            { name },
         );
     }
 
