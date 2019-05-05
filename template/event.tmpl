@@ -1,0 +1,17 @@
+// Event Emitter
+const eventEmitter = require("../helpers/event-emitter");
+
+// Create <%= name %>
+eventEmitter.on('<%= name %>-Created', (data) => {
+  console.log('<%= name %> Created', data);
+});
+
+// Update <%= name %>
+eventEmitter.on('<%= name %>-Updated', (data) => {
+  console.log('<%= name %> Updated', data);
+});
+
+// Delete <%= name %>
+eventEmitter.on('<%= name %>-Deleted', (data) => {
+  console.log('<%= name %> Deleted', data);
+});
