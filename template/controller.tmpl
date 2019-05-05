@@ -1,88 +1,38 @@
-const { <%= model %> } = require("../models");
+const { <%= service %> } = require("../services");
+
+const responseHandler = res => (err, response) => {
+  if (err) {
+    res.status(500).json(err);
+  } else {
+    res.status(200).json(response);
+  }
+};
 
 // Create <%= name %>
 exports.create = (req, res) => {
   const data = req.body;
 
-  <%= model %>.findOne(data)
-  .exec((err, exist) => {
-    if (!exist) {
-      <%= model %>.create(data, (err, data) => {
-        if (err) {
-          res.status(500).json({
-            error: true,
-            message: 'An error has occured ' + err
-          });
-        } else {
-          res.status(200).json(data);
-        }
-      });
-    } else {
-      res.status(400).json({
-        error: true,
-        message: '<%= name %> already exist'
-      });
-    }
-  });
+  <%= service %>.create(data, responseHandler(res));
 };
 
 // Read All <%= name %>s
 exports.readAll = (req, res) => {
-  const search = req.params.search;
-
-  <%= model %>.searchByAttributes(search).exec((err, data) => {
-    if (err) {
-      res.status(500).json({
-        error: true,
-        message: 'An error has occured ' + err
-      });
-    } else {
-      res.status(200).json(data);
-    }
-  });
+  <%= service %>.readAll(req.params.search, responseHandler(res));
 };
 
 // Read <%= name %>
 exports.read = (req, res) => {
-  <%= model %>.findOne({ _id: req.params.id }).exec((err, data) => {
-    if (err) {
-      res.status(500).json({
-        error: true,
-        message: 'An error has occured ' + err
-      });
-    } else {
-      res.status(200).json(data);
-    }
-  });
+  <%= service %>.read(req.params.id, responseHandler(res));
 };
 
 // Update <%= name %>
 exports.update = (req, res) => {
   const data = req.body;
 
-  <%= model %>.findOneAndUpdate({ _id: req.params.id }, data, { new: true })
-    .exec((err, data) => {
-      if (err) {
-        res.status(500).json({
-          error: true,
-          message: 'An error has occured ' + err
-        });
-      } else {
-        res.status(200).json(data);
-      }
-    });
+  <%= service %>.update(req.params.id, data, responseHandler(res));
 };
 
 // Delete <%= name %>
 exports.delete = (req, res) => {
-  <%= model %>.findOneAndRemove({ _id: req.params.id }, (err, data) => {
-    if (err) {
-      res.status(500).json({
-        error: true,
-        message: 'An error has occured ' + err
-      });
-    } else {
-      res.status(200).json('<%= name %> ' + data._id + ' deleted!');
-    }
-  });
+  <%= service %>.delete(req.params.id, responseHandler(res));
 };
