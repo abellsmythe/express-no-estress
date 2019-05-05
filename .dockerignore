@@ -1,0 +1,13 @@
+*.log
+.dockerignore
+.DS_Store
+.eslintcache
+.git
+.github
+.npmignore
+CONTRIBUTING.md
+docker/*
+jenkins
+node_modules
+npm-debug.log*
+README.md
