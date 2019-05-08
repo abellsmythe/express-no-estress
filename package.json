@@ -12,9 +12,10 @@
     "make:service": "node generator --service --name $1",
     "make:controller": "node generator --controller --name $1",
     "make:routes": "node generator --routes --name $1",
+    "make:validations": "node generator --validations --name $1",
     "make:events": "node generator --events --name $1",
     "make:docs": "node generator --docs -o --name $1",
-    "make:resource": "node generator --model --service --controller --routes --events --docs --name $1"
+    "make:resource": "node generator --model --service --controller --routes --validations --events --docs --name $1"
   },
   "keywords": [
     "REST",
@@ -40,6 +41,7 @@
     "dotenv": "^7.0.0",
     "express": "^4.16.4",
     "express-limiter": "^1.6.1",
+    "express-validation": "^1.0.2",
     "helmet": "^3.16.0",
     "hpp": "^0.2.2",
     "lodash": "^4.17.11",

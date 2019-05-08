@@ -1,0 +1,26 @@
+"use strict";
+
+// Dependencies
+const express  = require("express");
+
+// Controller
+const { <%= controller %> }  = require("../controllers");
+
+// Validations
+const { <%= validations %> } = require("../validations");
+
+// Router
+const <%= name %>Router = express.Router();
+
+    // Create <%= name %>
+    <%= name %>Router.post('/', <%= validations %>.create, <%= controller %>.create);
+    // Read All <%= name %>s
+    <%= name %>Router.get('/search/:search?', <%= controller %>.readAll);
+    // Read <%= name %>
+    <%= name %>Router.get('/:id', <%= controller %>.read);
+    // Update <%= name %>
+    <%= name %>Router.put('/:id', <%= validations %>.update, <%= controller %>.update);
+    // Delete <%= name %>
+    <%= name %>Router.delete('/:id', <%= validations %>.delete, <%= controller %>.delete);
+
+module.exports = <%= name %>Router;

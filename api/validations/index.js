@@ -7,7 +7,7 @@ require("fs").readdirSync(normalizedPath).forEach(function(file) {
     const splitFileName = file.split('.');
     const fileName      = splitFileName[0];
 
-    if (fileName !== 'index' && fileName.includes('Validation')) {
+    if (fileName !== 'index' && fileName.includes('Validations')) {
         validations[fileName] = require(`./${fileName}`);
     }
 });

@@ -96,6 +96,7 @@ const options = {
         m: false,
         s: false,
         c: false,
+        v: false,
         r: false,
         e: false,
         d: false,
@@ -107,6 +108,7 @@ const options = {
         m: 'model',
         s: 'service',
         c: 'controller',
+        v: 'validations',
         e: 'events',
         r: 'routes',
         d: 'docs',
@@ -128,6 +130,7 @@ const generator = async () => {
         lines.push({ msg: '\t npm run make:controller  -- [ -n name  | --name name ] [options]' });
         lines.push({ msg: '\t npm run make:routes      -- [ -n name  | --name name ] [options]' });
         lines.push({ msg: '\t npm run make:events      -- [ -n name  | --name name ] [options]' });
+        lines.push({ msg: '\t npm run make:validations -- [ -n name  | --name name ] [options]' });
         lines.push({ msg: '\t npm run make:docs        -- [ -n name  | --name name ] [options]' });
         lines.push({ msg: '\t npm run make:resource    -- [ -n name  | --name name ] [options]' });
         lines.push({ msg: '' });
@@ -136,6 +139,7 @@ const generator = async () => {
         lines.push({ msg: '\t npm run make:model test', color: 'yellow' });
         lines.push({ msg: '\t npm run make:controller test', color: 'yellow' });
         lines.push({ msg: '\t npm run make:events test', color: 'yellow' });
+        lines.push({ msg: '\t npm run make:validations test', color: 'yellow' });
         lines.push({ msg: '\t npm run make:routes test', color: 'yellow' });
         lines.push({ msg: '\t npm run make:resource test', color: 'yellow' });
         lines.push({ msg: '' });
@@ -146,6 +150,7 @@ const generator = async () => {
         lines.push({ msg: '  -m, --service    \t create service             \t\t (default: false, required: model)' });
         lines.push({ msg: '  -c, --controller \t create controller          \t\t (default: false, required: service)' });
         lines.push({ msg: '  -e, --events     \t create events emitter      \t\t (default: false, required: service)' });
+        lines.push({ msg: '  -v, --validations\t create validations         \t\t (default: false)' });
         lines.push({ msg: '  -r, --routes     \t create routes              \t\t (default: false, required: controller)' });
         lines.push({ msg: '  -d, --docs       \t create Swagger basic doc   \t\t (default: false, required: model)' });
         lines.push({ msg: '  -o, --overwrite  \t if file exist overwrite it \t\t (default: false)' });
@@ -208,13 +213,24 @@ const generator = async () => {
         );
     }
 
+    // Create Validations
+    if (args.validations) {
+        await createFileFromTemplate(
+            'Validations',
+            `./api/validations/${name}Validations.js`,
+            './template/validations.tmpl',
+            { name },
+        );
+    }
+
     // Create Routes
     if (args.routes) {
+        const template = args.validations ? 'routes-with-validation' : 'routes';
         await createFileFromTemplate(
             'Routes',
             `./api/routes/${name}Routes.js`,
-            './template/routes.tmpl',
-            { name, controller: `${name}Controller` },
+            `./template/${template}.tmpl`,
+            { name, controller: `${name}Controller`, validations: `${name}Validations` },
         );
     }
 
