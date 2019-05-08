@@ -1,3 +1,5 @@
+#! /usr/bin/env node
+
 "use strict";
 
 // Dependencies
@@ -15,8 +17,8 @@ const print = (lines) => {
     });
 };
 
-const whiteSpaces = (n) => {
-    return " ".repeat(n);
+const whiteSpaces = (word, n) => {
+    return `${word}${" ".repeat(n - word.length)}`;
 }
 
 const createFile = (name, overwrite) => (type, filePath, templatePath, templateVariables) => {
@@ -34,9 +36,9 @@ const createFile = (name, overwrite) => (type, filePath, templatePath, templateV
             actionColor = 'red';
         }
     
-        message += `${chalk.yellow(type)}${whiteSpaces(12 - type.length)}`;
-        message += `${chalk[actionColor](name)}${whiteSpaces(15 - name.length)}`;
-        message += `${action}${whiteSpaces(20 - action.length)}`;
+        message += chalk.yellow(whiteSpaces(type, 12));
+        message += chalk[actionColor](whiteSpaces(name, 15));
+        message += whiteSpaces(action, 20);
         message += `${chalk.grey(filePath)}`;
         
         print([{
