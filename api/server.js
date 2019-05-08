@@ -1,8 +1,9 @@
 "use strict";
 
 // Dependencies
-const express   = require("express");
+const boxen     = require("boxen");
 const chalk     = require("chalk");
+const express   = require("express");
 
 // Enviroment
 const config    = require("../config");
@@ -29,7 +30,15 @@ async function startServer() {
       return;
     }
 
-    console.log(`\n${chalk.hex('#9000FF').bold('Server')} listening on port: ${chalk.hex('#9000FF').bold(server.address().port)}\n`);
+    const message = `${chalk.cyan.bold('Server')} listening on port: ${chalk.cyan.bold(server.address().port)}`;
+    const box = boxen(message, {
+        borderColor: "cyan",
+        borderStyle: "round",
+        margin: 1,
+        padding: 1
+    });
+
+    console.log(box);
   });
 
 }
