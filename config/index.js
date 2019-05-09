@@ -10,24 +10,26 @@ if (!envFound) {
   throw new Error('Couldn\'t find .env file');
 }
 
-const env     = require("./env");
-const db      = require("./db");
-const redis   = require("./redis");
-const keys    = require("./keys");
 const body    = require("./body-parser");
 const cookie  = require("./cookie");
 const cors    = require("./cors");
+const db      = require("./db");
+const env     = require("./env");
+const keys    = require("./keys");
 const limiter = require("./limiter");
+const session = require("./session");
 const swagger = require("./swagger");
+const redis   = require("./redis");
 
 module.exports = {
-  env,
-  db,
-  redis,
-  keys,
   body,
   cookie,
   cors,
+  db,
+  env,
+  keys,
   limiter,
+  session,
   swagger,
+  redis,
 };
