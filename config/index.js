@@ -11,7 +11,7 @@ if (!envFound) {
 }
 
 const body    = require("./body-parser");
-const cookie  = require("./cookie");
+const cookie  = require("./cookie-parser");
 const cors    = require("./cors");
 const db      = require("./db");
 const env     = require("./env");
