@@ -16,7 +16,7 @@ module.exports = (app) => {
         name : 'sessionId',
         resave: false,
         saveUninitialized: true,
-        secret: config.session.secrete,
+        secret: config.session.secret,
     }));
     
     console.log(`${chalk.yellow('Session')} loaded ${chalk.green('successful')}`);
