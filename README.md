@@ -17,8 +17,6 @@ Representational state transfer (REST) or RESTful web services is a way of provi
 
 ## Project Structure
 
-There is a good segregation of responsabilities with a solid architecture, Where the ***api*** folder contains everythings that it's stricted related to his name, there is a ***controller*** folder where must be placed the controller of Express implementing the corresponding service, inside the ***docs*** folder are all the swagger files related to the endpoints, in the ***events*** folder are the logic to trigger when an event is called, in the ***loaders*** folder are all the services that must be loaded with the app, in the ***models*** folder are the schemas for MongoDB, in the ***routes*** folder are all the routes of endpoints, in the ***services*** folder are the handlers to the database model, in the ***static*** folder are all the content that's public served and in the ***validations*** folder are the validations schema for the requests.
-
 - api 
     - controllers
     - docs
