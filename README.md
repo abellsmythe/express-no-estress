@@ -1,6 +1,6 @@
 # Express no Estress
 
-Express no Estress is an Express Based API skeleton. This project can be used for creating a RESTful API using NodeJS, `express` as the framework, `mongoose` MongoDB ODM with great packages for handle secutiry like `helmet` and `hpp` and others like `body-parser`, `cookie-parser` `cors`. `cucumber` is also used for running integration tests for the endpoints and `swagger` for docs.
+Express no Estress is an Express Based API skeleton. This project can be used for creating a RESTful API using NodeJS, `express` as the framework, `mongoose` MongoDB ODM with great packages for handle secutiry like `helmet` and `hpp` also others like `body-parser`, `cookie-parser` `cors`. `cucumber` is used for running integration tests for the endpoints and `swagger` for docs byside `passport` for handle user authentication.
 
 It have a helper command to `make` all the files with a basic setup for a CRUD service
 
@@ -106,6 +106,8 @@ Representational state transfer (REST) or RESTful web services is a way of provi
 | minimist                        | Scripts parse argument options.
 | mongoose                        | MongoDB ODM.
 | nodemon                         | Simple monitor script for use during development of a node.js app.
+| passport                        | Simple and elegant authentication library for node.js.
+| passport-local                  | Sign-in with Username and Password plugin.
 | pm2                             | Production process manager for Node.JS with a built-in load balancer.
 | redis                           | Redis client library.
 | request-promise                 | The simplified HTTP request client 'request' with Promise support.
