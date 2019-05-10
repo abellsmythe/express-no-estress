@@ -1,0 +1,108 @@
+paths:
+  /user/:
+    post:
+      tags:
+        - User
+      summary: creates a new User
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: create
+        description: creates a new User
+        required: true
+        schema:
+          $ref: '#/definitions/User' 
+      responses:
+        201:
+          description: An object User with details
+  /user/{id}:
+    get:
+      tags:
+        - User
+      summary: get a User by id
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      responses:
+        201:
+          description: An object User with details
+    put:
+      tags:
+        - User
+      summary: update a User by id
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      - in: body
+        name: create
+        description: creates a new User
+        required: true
+        schema:
+          $ref: '#/definitions/User' 
+      responses:
+        201:
+          description: An object User with details
+    delete:
+      tags:
+        - User
+      summary: delete a User by id
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      responses:
+        201:
+          description: A message of deleted User
+  /user/search/{search}:
+    get:
+      tags:
+        - User
+      summary: get a User by search parameters
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: search
+        schema:
+          type: string
+        required: true
+      responses:
+        201:
+          description: An Array of objects User with details
+definitions:
+  User:
+    type: object
+    properties: 
+      email:
+        type: string
+      password:
+        type: string
+      passwordResetToken:
+        type: string
+      passwordResetExpires:
+        type: date
+      profile.name:
+        type: string
+      profile.gender:
+        type: string
+      profile.location:
+        type: string
+      profile.website:
+        type: string
+      profile.picture:
+        type: string

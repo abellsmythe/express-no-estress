@@ -85,6 +85,7 @@ Representational state transfer (REST) or RESTful web services is a way of provi
 | Package                         | Description
 | ------------------------------- | ------------------------------------------------------------------------
 | assert                          | Writing unit tests for your applications.
+| bcrypt                          | Library for hashing and salting user passwords.
 | body-parser                     | Node.js body parsing middleware.
 | boxen                           | Create boxes in terminal.
 | chalk                           | Terminal string styling done right.
