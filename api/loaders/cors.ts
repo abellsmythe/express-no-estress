@@ -1,15 +1,16 @@
-"use strict";
+'use strict';
 
 // Dependencies
-const cors  = require("cors");
-const chalk = require("chalk");
+import chalk from 'chalk';
+import * as cors from 'cors';
 
 // Enviroment
-const config    = require("../../config");
+import config from '../../config';
 
-module.exports = (app) => {
+export default (app: any) => {
     // Enable Cross Origin Resource Sharing to all origins by default
     app.use(cors(config.cors));
 
+    // tslint:disable-next-line no-console
     console.log(`${chalk.yellow('Cors')} loaded ${chalk.green('successful')}`);
 };
