@@ -1,12 +1,13 @@
-"use strict";
+'use strict';
 
 // Dependencies
-const path      = require("path");
-const express   = require("express");
-const chalk     = require("chalk");
+import chalk from 'chalk';
+import * as express from 'express';
+import * as path from 'path';
 
-module.exports = async (app) => {
+export default async (app: any) => {
     app.use('/public', express.static(path.join(__dirname, '../', 'public')));
-    
+
+    // tslint:disable-next-line no-console
     console.log(`${chalk.yellow('Public Static Folder')} loaded ${chalk.green('successful')}`);
 };
