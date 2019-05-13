@@ -1,13 +1,13 @@
-"use strict";
+'use strict';
 
 // Dependencies
-const chalk    = require("chalk");
-const session  = require("express-session");
+import chalk from 'chalk';
+import * as session from 'express-session';
 
 // Environment
-const config = require("../../config");
+import config from '../../config';
 
-module.exports = (app) => {
+export default (app: any) => {
     app.use(session({
         cookie: {
             maxAge: config.session.age,
@@ -18,6 +18,7 @@ module.exports = (app) => {
         saveUninitialized: true,
         secret: config.session.secret,
     }));
-    
+
+    // tslint:disable-next-line no-console
     console.log(`${chalk.yellow('Session')} loaded ${chalk.green('successful')}`);
 };
