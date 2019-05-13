@@ -177,7 +177,7 @@ const generator = async () => {
     if (args.model) {
         await createFileFromTemplate(
             'Model',
-            `./api/models/${name}Model.js`,
+            `./api/models/${name}Model.ts`,
             './template/model.tmpl',
             { name, schema: `${name}Schema` },
         );
@@ -187,7 +187,7 @@ const generator = async () => {
     if (args.service) {
         await createFileFromTemplate(
             'Service',
-            `./api/services/${name}Service.js`,
+            `./api/services/${name}Service.ts`,
             './template/service.tmpl',
             { name, model: `${name}Model` },
         );
@@ -197,7 +197,7 @@ const generator = async () => {
     if (args.controller) {
         await createFileFromTemplate(
             'Controller',
-            `./api/controllers/${name}Controller.js`,
+            `./api/controllers/${name}Controller.ts`,
             './template/controller.tmpl',
             { name, service: `${name}Service` },
         );
@@ -207,7 +207,7 @@ const generator = async () => {
     if (args.events) {
         await createFileFromTemplate(
             'Event',
-            `./api/events/${name}Event.js`,
+            `./api/events/${name}Event.ts`,
             './template/event.tmpl',
             { name },
         );
@@ -217,7 +217,7 @@ const generator = async () => {
     if (args.validations) {
         await createFileFromTemplate(
             'Validations',
-            `./api/validations/${name}Validations.js`,
+            `./api/validations/${name}Validations.ts`,
             './template/validations.tmpl',
             { name },
         );
@@ -228,7 +228,7 @@ const generator = async () => {
         const template = args.validations ? 'routes-with-validation' : 'routes';
         await createFileFromTemplate(
             'Routes',
-            `./api/routes/${name}Routes.js`,
+            `./api/routes/${name}Routes.ts`,
             `./template/${template}.tmpl`,
             { name, controller: `${name}Controller`, validations: `${name}Validations` },
         );
@@ -236,7 +236,7 @@ const generator = async () => {
 
     // Create Swagger Docs
     if (args.docs) {
-        const modelFilePath = `./api/models/${name}Model.js`;
+        const modelFilePath = `./api/models/${name}Model.ts`;
 
         if (fs.existsSync(modelFilePath)) {
             const model         = await require(modelFilePath);
