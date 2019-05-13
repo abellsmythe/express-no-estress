@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 const {
     DB_USER: user,
@@ -8,7 +8,7 @@ const {
     DB_NAME: database = 'rest-api',
 } = process.env;
 
-let url = [
+const url = [
     'mongodb://',
     user && password ? `${user}:${password}@` : '',
     host,
@@ -16,13 +16,22 @@ let url = [
     `/${database}`,
 ].join('');
 
-const db = {
-    url,
-    user, 
-    password,
-    host,
-    port,
+export interface Db {
+    database: string;
+    host: string;
+    password: string | undefined;
+    port: number;
+    url: string;
+    user: string | undefined;
+}
+
+const db: Db = {
     database,
+    host,
+    password,
+    port: parseInt(port, 10),
+    url,
+    user,
 };
 
-module.exports = db;
+export default db;

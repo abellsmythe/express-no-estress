@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 const {
     REDIS_HOST: host = '127.0.0.1',
@@ -8,10 +8,16 @@ const {
 
 const url =  redisurl ? redisurl : `redis://${host}:${port}`;
 
-const redis = {
+export interface Redis {
+    host: string;
+    port: number;
+    url: string;
+}
+
+const redis: Redis = {
     host,
-    port,
-    url
+    port: parseInt(port, 10),
+    url,
 };
 
-module.exports = redis;
+export default redis;
