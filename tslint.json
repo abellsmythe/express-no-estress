@@ -1,0 +1,16 @@
+{
+    "extends": "tslint:recommended",
+    "rules": {
+      "interface-name": [true, "never-prefix"],
+      "lines-between-class-members": [true, 2],
+      "max-line-length": {
+        "options": [100]
+      },
+      "member-ordering": true,
+      "no-consecutive-blank-lines": true,
+      "object-literal-sort-keys": false,
+      "ordered-imports": true,
+      "quotemark": [true, "single"],
+      "variable-name": [true, "allow-leading-underscore"]
+    }
+  }
