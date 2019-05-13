@@ -1,13 +1,13 @@
-"use strict";
+'use strict';
 
 // Dependencies
-const bodyParser    = require("body-parser");
-const chalk         = require("chalk");
+import * as bodyParser from 'body-parser';
+import chalk from 'chalk';
 
 // Environment
-const config = require("../../config");
+import config from '../../config';
 
-module.exports = (app) => {
+export default (app: any) => {
     // Middleware that transform the raw string of req.body into a json
     app.use(bodyParser.urlencoded({ extended: false }));
     app.use(bodyParser.json({ limit: config.body.jsonLimit }));
@@ -16,6 +16,7 @@ module.exports = (app) => {
     app.use(bodyParser.json());
     app.use(bodyParser.raw());
     app.use(bodyParser.text());
-    
+
+    // tslint:disable-next-line no-console
     console.log(`${chalk.yellow('Body Parser')} loaded ${chalk.green('successful')}`);
 };
