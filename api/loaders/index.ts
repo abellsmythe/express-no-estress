@@ -1,9 +1,17 @@
-"use strict";
+'use strict';
 
-const loaders = {};
-const normalizedPath = require("path").join(__dirname, "./");
+// Dependencies
+import * as fs from 'fs';
+import * as path from 'path';
 
-require("fs").readdirSync(normalizedPath).forEach(function(file) {
+interface Loaders {
+    [key: string]: any;
+}
+
+const loaders: Loaders = {};
+const normalizedPath: string = path.join(__dirname, './');
+
+fs.readdirSync(normalizedPath).forEach((file) => {
     const splitFileName = file.split('.');
     const fileName      = splitFileName[0];
 
@@ -12,7 +20,7 @@ require("fs").readdirSync(normalizedPath).forEach(function(file) {
     }
 });
 
-module.exports = async function (app) {
+export default async (app: any) => {
     const loadersList = Object.entries(loaders);
     for (const [_, loader] of loadersList) {
         await loader(app);
