@@ -2,7 +2,7 @@
 
 // Dependencies
 import chalk from 'chalk';
-import * as helmet from 'helmet';
+import helmet from 'helmet';
 
 export default (app: any) => {
     app.use(helmet());

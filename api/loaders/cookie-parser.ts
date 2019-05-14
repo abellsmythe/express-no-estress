@@ -2,7 +2,7 @@
 
 // Dependencies
 import chalk from 'chalk';
-import * as cookieParser from 'cookie-parser';
+import cookieParser from 'cookie-parser';
 
 export default (app: any) => {
     app.use(cookieParser());

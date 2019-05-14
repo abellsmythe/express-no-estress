@@ -2,7 +2,7 @@
 
 // Dependencies
 import chalk from 'chalk';
-import * as session from 'express-session';
+import session from 'express-session';
 
 // Environment
 import config from '../../config';

@@ -2,8 +2,8 @@
 
 // Dependencies
 import chalk from 'chalk';
-import * as express from 'express';
-import * as path from 'path';
+import express from 'express';
+import path from 'path';
 
 export default async (app: any) => {
     app.use('/public', express.static(path.join(__dirname, '../', 'public')));

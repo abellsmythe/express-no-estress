@@ -3,7 +3,7 @@
 // Dependencies
 import chalk from 'chalk';
 import swaggerJSDoc = require('swagger-jsdoc');
-import * as swaggerUi from 'swagger-ui-express';
+import  swaggerUi from 'swagger-ui-express';
 
 // Environment
 import config from '../../config';

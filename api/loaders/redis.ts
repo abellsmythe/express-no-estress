@@ -2,7 +2,7 @@
 
 // Dependencies
 import chalk from 'chalk';
-import * as redis from 'redis';
+import  redis from 'redis';
 
 // Environment
 import config from '../../config';

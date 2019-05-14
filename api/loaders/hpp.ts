@@ -2,7 +2,7 @@
 
 // Dependencies
 import chalk from 'chalk';
-import * as hpp from 'hpp';
+import hpp from 'hpp';
 
 export default (app: any) => {
     app.use(hpp());

@@ -2,7 +2,7 @@
 
 // Dependencies
 import chalk from 'chalk';
-import * as cors from 'cors';
+import cors from 'cors';
 
 // Enviroment
 import config from '../../config';

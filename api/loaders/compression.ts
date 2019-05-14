@@ -2,7 +2,7 @@
 
 // Dependencies
 import chalk from 'chalk';
-import * as compression from 'compression';
+import compression from 'compression';
 
 export default (app: any) => {
     // Middleware that compress the response

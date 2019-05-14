@@ -1,7 +1,7 @@
 'use strict';
 
 // Dependencies
-import * as bodyParser from 'body-parser';
+import  bodyParser from 'body-parser';
 import chalk from 'chalk';
 
 // Environment
