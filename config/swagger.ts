@@ -1,7 +1,7 @@
 'use strict';
 
 // Package JSON
-import * as me from '../package.json';
+import me from '../package.json';
 
 const {
     PORT: port = '3000',

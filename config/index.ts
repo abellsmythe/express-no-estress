@@ -1,7 +1,7 @@
 'use strict';
 
 // Dependencies
-import * as dotenv from 'dotenv';
+import dotenv from 'dotenv';
 
 const envFound = dotenv.config();
 if (!envFound) {
