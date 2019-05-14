@@ -24,7 +24,7 @@
       "no-console": true,
       "no-consecutive-blank-lines": true,
       "no-debugger": true,
-      "no-invalid-this": true,
+      "no-invalid-this": false,
       "no-trailing-whitespace": true,
       "object-literal-sort-keys": false,
       "one-line": [true, "check-open-brace"],

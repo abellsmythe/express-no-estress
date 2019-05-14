@@ -1,8 +1,8 @@
 'use strict';
 
 // Dependencies
-import * as bcrypt from 'bcrypt';
-import * as mongoose from 'mongoose';
+import bcrypt from 'bcrypt';
+import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 // Helpers
