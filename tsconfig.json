@@ -1,19 +1,25 @@
 {
     "compilerOptions": {
+      "alwaysStrict": true,
       "baseUrl": "./",
+      "declaration": false,
       "emitDecoratorMetadata": true,
+      "esModuleInterop": true,
       "experimentalDecorators": true,
       "importHelpers": true,
       "lib": [
         "es2015",
-        "dom"
+        "es6",
+        "dom",
       ],
       "module": "commonjs",
       "moduleResolution": "node",
       "outDir": "build",
       "removeComments": true,
       "resolveJsonModule": true,
+      "sourceMap": true,
       "strict": true,
+      "strictNullChecks": true,
       "target": "es5",
       "types": [
         "node"

@@ -1,16 +1,43 @@
 {
     "extends": "tslint:recommended",
     "rules": {
+      "arrow-return-shorthand": true,
+      "import-name": false,
       "interface-name": [true, "never-prefix"],
       "lines-between-class-members": [true, 2],
       "max-line-length": {
         "options": [100]
       },
-      "member-ordering": true,
+      "member-ordering": [
+        true,
+        {
+          "order": [
+            "static-field",
+            "instance-field",
+            "constructor",
+            "public-instance-method",
+            "protected-instance-method",
+            "private-instance-method"
+          ]
+        }
+      ],
+      "no-console": true,
       "no-consecutive-blank-lines": true,
+      "no-debugger": true,
+      "no-invalid-this": true,
+      "no-trailing-whitespace": true,
       "object-literal-sort-keys": false,
+      "one-line": [true, "check-open-brace"],
       "ordered-imports": true,
       "quotemark": [true, "single"],
+      "trailing-comma": [
+        true,
+        {
+          "multiline": "always",
+          "singleline": "never",
+          "esSpecCompliant": true
+        }
+      ],
       "variable-name": [true, "allow-leading-underscore"]
     }
   }
