@@ -1,19 +1,20 @@
-"use strict";
+'use strict';
 
 // Dependencies
-const swaggerJSDoc  = require('swagger-jsdoc');
-const swaggerUi     = require('swagger-ui-express');
-const chalk         = require("chalk");
+import chalk from 'chalk';
+import swaggerJSDoc = require('swagger-jsdoc');
+import * as swaggerUi from 'swagger-ui-express';
 
 // Environment
-const config = require("../../config");
+import config from '../../config';
 
-module.exports = (app) => {
+export default (app: any) => {
     // initialize swagger-jsdoc
     const swaggerSpec = swaggerJSDoc(config.swagger);
 
     // use swagger-Ui-express for your app documentation endpoint
     app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
+    // tslint:disable-next-line no-console
     console.log(`${chalk.yellow('Swagger')} docs loaded ${chalk.green('successful')}`);
 };
