@@ -1,8 +1,8 @@
 'use strict';
 
 // Dependencies
-import * as fs from 'fs';
-import * as path from 'path';
+import  fs from 'fs';
+import  path from 'path';
 
 // Environment
 import config from '../../config';

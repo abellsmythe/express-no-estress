@@ -1,8 +1,8 @@
 'use strict';
 
 // Dependencies
-import * as fs from 'fs';
-import * as path from 'path';
+import fs from 'fs';
+import path from 'path';
 
 interface Validations {
     [key: string]: any;
@@ -12,8 +12,7 @@ const validations: Validations = {};
 const normalizedPath = path.join(__dirname, './');
 
 fs.readdirSync(normalizedPath).forEach((file) => {
-    const splitFileName = file.split('.');
-    const fileName      = splitFileName[0];
+    const fileName = file.split('.')[0];
 
     if (fileName !== 'index' && fileName.includes('Validations')) {
         validations[fileName] = require(`./${fileName}`);
